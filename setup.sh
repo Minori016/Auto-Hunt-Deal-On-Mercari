@@ -44,7 +44,7 @@ cat config.json.example | jq \
 
 # 5. Build
 echo "🔨 Building AutoBot..."
-go build -o autobot ./cmd/autobot/
+CGO_ENABLED=0 go build -o autobot ./cmd/autobot/
 
 echo "======================="
 echo "✅ Setup complete!"
