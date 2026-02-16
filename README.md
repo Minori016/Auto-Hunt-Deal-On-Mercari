@@ -22,22 +22,13 @@ Inspired by the efficiency of [PicoClaw](https://github.com/sipeed/picoclaw), it
 
 ---
 
-## 🚀 Quick Start
-
-### 1. Prerequisites
-- **Go**: [Install Go 1.20 or later](https://go.dev/dl/).
-- **Telegram Bot**: Create a bot via [@BotFather](https://t.me/botfather) and get your **Token** and **Chat ID**.
-- **HuggingFace API Key**: Get a free token from [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens).
-
-### 2. Installation
-```bash
-# Clone the repository
-git clone https://github.com/Minori016/AutoBot.git
-cd AutoBot
-
-# Install dependencies
-go mod tidy
-```
+### Quick Android Setup
+1. Download **[Termux](https://f-droid.org/repo/com.termux_0.118.apk)** and open it.
+2. Copy and paste this single line to start the guided setup:
+   ```bash
+   pkg install git -y && git clone https://github.com/Minori016/Auto-Hunt-Deal-On-Mercari.git && cd Auto-Hunt-Deal-On-Mercari && chmod +x setup.sh && ./setup.sh
+   ```
+3. Follow the on-screen instructions to enter your Token and Chat ID.
 
 ### 3. Configuration
 Copy the example config and edit it with your credentials and brands:
