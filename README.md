@@ -2,7 +2,7 @@
 
 [![Go Version](https://img.shields.io/badge/Go-1.20+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20RaspberryPi-orange)](https://github.com/Minori016/AutoBot)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20RaspberryPi-orange)](https://github.com/Minori016/Auto-Hunt-Deal-On-Mercari)
 
 **AutoBot** is an ultra-lightweight, high-performance automated deal hunter for **Mercari Japan**. It monitors specific luxury brands, designer labels, and vintage sportswear, utilizing AI to filter out "trash" listings and alerting you instantly via Telegram.
 
