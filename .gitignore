@@ -1,0 +1,20 @@
+# Binaries
+*.exe
+autobot
+autobot-pi
+
+# Configuration (contains secrets!)
+config.json
+
+# Database
+autobot_seen.db
+autobot_seen.db-journal
+autobot_seen.db-shm
+autobot_seen.db-wal
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Go
+vendor/

@@ -1,0 +1,22 @@
+{
+    "telegram": {
+        "bot_token": "YOUR_TELEGRAM_BOT_TOKEN",
+        "chat_id": "YOUR_TELEGRAM_CHAT_ID"
+    },
+    "huggingface": {
+        "api_key": "YOUR_HUGGINGFACE_API_KEY",
+        "model": "openai/clip-vit-large-patch14"
+    },
+    "enable_ai_filter": true,
+    "scan_interval_minutes": 5,
+    "price_min": 300,
+    "price_max": 20000,
+    "max_age_minutes": 180,
+    "max_deals_per_keyword": 10,
+    "brands": [
+        {
+            "name": "Undercover",
+            "keywords": ["UNDERCOVER", "アンダーカバー"]
+        }
+    ]
+}
