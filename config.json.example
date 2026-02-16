@@ -8,15 +8,155 @@
         "model": "openai/clip-vit-large-patch14"
     },
     "enable_ai_filter": true,
-    "scan_interval_minutes": 5,
+    "scan_interval_minutes": 2,
     "price_min": 300,
-    "price_max": 20000,
+    "price_max": 10000,
     "max_age_minutes": 180,
     "max_deals_per_keyword": 10,
     "brands": [
         {
             "name": "Undercover",
-            "keywords": ["UNDERCOVER", "アンダーカバー"]
+            "keywords": ["UNDERCOVER", "アンダーカバー", "undercoverism", "アンダーカバーイズム"]
+        },
+        {
+            "name": "Comme des Garcons",
+            "keywords": ["Comme des Garcons", "コムデギャルソン", "CDG"]
+        },
+        {
+            "name": "CDG Homme Plus",
+            "keywords": ["Comme des Garcons Homme Plus", "コムデギャルソン オムプリュス"]
+        },
+        {
+            "name": "CDG Shirt",
+            "keywords": ["Comme des Garcons Shirt", "コムデギャルソン シャツ"]
+        },
+        {
+            "name": "CDG Evergreen",
+            "keywords": ["Comme des Garcons Evergreen", "コムデギャルソン エバーグリーン"]
+        },
+        {
+            "name": "Yohji Yamamoto",
+            "keywords": ["Yohji Yamamoto Pour Homme", "ヨウジヤマモト プールオム", "Yohji Yamamoto"]
+        },
+        {
+            "name": "Y's",
+            "keywords": ["Y's ワイズ", "Y's for men", "ワイズ フォーメン"]
+        },
+        {
+            "name": "Issey Miyake",
+            "keywords": ["Issey Miyake", "イッセイミヤケ"]
+        },
+        {
+            "name": "Pleats Please",
+            "keywords": ["PLEATS PLEASE", "プリーツプリーズ"]
+        },
+        {
+            "name": "Mihara Yasuhiro",
+            "keywords": ["Mihara Yasuhiro", "ミハラヤスヒロ", "MAISON MIHARA YASUHIRO"]
+        },
+        {
+            "name": "Shinya Kozuka",
+            "keywords": ["SHINYA KOZUKA", "コヅカシンヤ"]
+        },
+        {
+            "name": "Dickies",
+            "keywords": ["Dickies active jacket", "Dickies detroit jacket", "ディッキーズ アクティブジャケット", "ディッキーズ デトロイトジャケット"]
+        },
+        {
+            "name": "Carhartt",
+            "keywords": ["Carhartt active jacket", "Carhartt detroit jacket", "カーハート アクティブジャケット", "カーハート デトロイトジャケット"]
+        },
+        {
+            "name": "Nike Football",
+            "keywords": ["Nike ユニフォーム ヴィンテージ", "ナイキ サッカー ユニフォーム 古着"]
+        },
+        {
+            "name": "Umbro Football",
+            "keywords": ["Umbro ユニフォーム ヴィンテージ", "アンブロ サッカー ユニフォーム 古着"]
+        },
+        {
+            "name": "Lotto Football",
+            "keywords": ["Lotto ユニフォーム ヴィンテージ", "ロット サッカー ユニフォーム 古着"]
+        },
+        {
+            "name": "Real Madrid",
+            "keywords": ["レアルマドリード ユニフォーム"]
+        },
+        {
+            "name": "Barcelona",
+            "keywords": ["バルセロナ ユニフォーム"]
+        },
+        {
+            "name": "Manchester United",
+            "keywords": ["マンチェスターユナイテッド ユニフォーム"]
+        },
+        {
+            "name": "Liverpool",
+            "keywords": ["リバプール ユニフォーム"]
+        },
+        {
+            "name": "Bayern Munich",
+            "keywords": ["バイエルン ユニフォーム"]
+        },
+        {
+            "name": "AC Milan",
+            "keywords": ["ACミラン ユニフォーム"]
+        },
+        {
+            "name": "Juventus",
+            "keywords": ["ユベントス ユニフォーム"]
+        },
+        {
+            "name": "Chelsea",
+            "keywords": ["チェルシー ユニフォーム"]
+        },
+        {
+            "name": "Arsenal",
+            "keywords": ["アーセナル ユニフォーム"]
+        },
+        {
+            "name": "Inter Milan",
+            "keywords": ["インテル ユニフォーム"]
+        },
+        {
+            "name": "Brazil NT",
+            "keywords": ["ブラジル代表 ユニフォーム"]
+        },
+        {
+            "name": "Argentina NT",
+            "keywords": ["アルゼンチン代表 ユニフォーム"]
+        },
+        {
+            "name": "Germany NT",
+            "keywords": ["ドイツ代表 ユニフォーム"]
+        },
+        {
+            "name": "Italy NT",
+            "keywords": ["イタリア代表 ユニフォーム"]
+        },
+        {
+            "name": "France NT",
+            "keywords": ["フランス代表 ユニフォーム"]
+        },
+        {
+            "name": "England NT",
+            "keywords": ["イングランド代表 ユニフォーム"]
+        },
+        {
+            "name": "Spain NT",
+            "keywords": ["スペイン代表 ユニフォーム"]
+        },
+        {
+            "name": "Netherlands NT",
+            "keywords": ["オランダ代表 ユニフォーム"]
+        },
+        {
+            "name": "Portugal NT",
+            "keywords": ["ポルトガル代表 ユニフォーム"]
+        },
+        {
+            "name": "Japan NT",
+            "keywords": ["日本代表 ユニフォーム ヴィンテージ"]
         }
     ]
 }
