@@ -96,6 +96,7 @@ func main() {
 	}
 
 	// Main loop with panic recovery
+	bot.startTime = time.Now()
 	bot.run()
 }
 
@@ -106,6 +107,11 @@ type Bot struct {
 	filter   *mercari.AIFilter
 	notifier *telegram.Notifier
 	store    *store.DedupStore
+
+	// Status tracking
+	startTime    time.Time
+	lastScanTime time.Time
+	runCount     int
 }
 
 // run starts the main bot loop with graceful shutdown.
@@ -118,6 +124,12 @@ func (b *Bot) run() {
 	// Setup graceful shutdown
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+
+	// Start Telegram command listener (for /check)
+	// Create a separate stop channel for the listener since it runs in a goroutine
+	listenerStop := make(chan struct{})
+	go b.notifier.ListenForCommands(listenerStop, b.getStatus)
+	defer close(listenerStop)
 
 	ticker := time.NewTicker(time.Duration(b.cfg.ScanIntervalMin) * time.Minute)
 	defer ticker.Stop()
@@ -180,10 +192,33 @@ func (b *Bot) runScanCycle() {
 		totalFound, totalNew, totalSent, duration.Seconds())
 	log.Println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
-	// Send summary if we found new items
 	if totalNew > 0 {
 		_ = b.notifier.SendScanSummary(totalFound, totalNew, totalSent, duration)
 	}
+
+	b.lastScanTime = time.Now()
+	b.runCount++
+}
+
+func (b *Bot) getStatus() string {
+	uptime := time.Since(b.startTime).Round(time.Second)
+	lastScan := "Never"
+	if !b.lastScanTime.IsZero() {
+		lastScan = time.Since(b.lastScanTime).Round(time.Second).String() + " ago"
+	}
+
+	return fmt.Sprintf(
+		"🤖 <b>AutoBot Status</b>\n\n"+
+			"✅ <b>Running</b>\n"+
+			"⏳ Uptime: %s\n"+
+			"🔄 Cycles: %d\n"+
+			"🕒 Last scan: %s\n"+
+			"📦 Items tracked: %d",
+		uptime,
+		b.runCount,
+		lastScan,
+		b.store.Count(),
+	)
 }
 
 // scanBrand searches for a single brand across all its keywords.

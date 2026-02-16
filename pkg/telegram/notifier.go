@@ -38,7 +38,7 @@ func NewNotifier(botToken, chatID string) *Notifier {
 
 type sendPhotoRequest struct {
 	ChatID    string `json:"chat_id"`
-	Photo     string `json:"photo"`      // URL of the image
+	Photo     string `json:"photo"` // URL of the image
 	Caption   string `json:"caption"`
 	ParseMode string `json:"parse_mode"` // "HTML" or "MarkdownV2"
 }
@@ -50,8 +50,23 @@ type sendMessageRequest struct {
 }
 
 type telegramResponse struct {
-	OK          bool   `json:"ok"`
-	Description string `json:"description,omitempty"`
+	OK          bool            `json:"ok"`
+	Description string          `json:"description,omitempty"`
+	Result      json.RawMessage `json:"result,omitempty"`
+}
+
+type update struct {
+	UpdateID int      `json:"update_id"`
+	Message  *message `json:"message"`
+}
+
+type message struct {
+	Chat *chat  `json:"chat"`
+	Text string `json:"text"`
+}
+
+type chat struct {
+	ID int64 `json:"id"`
 }
 
 // ---------- Public methods ----------
@@ -116,6 +131,81 @@ func (n *Notifier) SendScanSummary(totalFound, totalNew, totalKept int, duration
 func (n *Notifier) TestConnection() error {
 	msg := "🧪 <b>AutoBot Test</b>\n\nTelegram connection successful! ✅"
 	return n.sendMessage(msg)
+}
+
+// ListenForCommands starts a long-polling loop to listen for /check commands.
+// It matches the specific chatID to prevent unauthorized access.
+func (n *Notifier) ListenForCommands(stopChan <-chan struct{}, getStatus func() string) {
+	offset := 0
+
+	for {
+		select {
+		case <-stopChan:
+			return
+		default:
+			// Poll updates
+			updates, newOffset, err := n.getUpdates(offset)
+			if err != nil {
+				// Log error but verify it's not just a timeout
+				time.Sleep(5 * time.Second) // backoff
+				continue
+			}
+			offset = newOffset
+
+			for _, up := range updates {
+				if up.Message == nil || up.Message.Text == "" {
+					continue
+				}
+
+				// Security check: only allow configured chatID
+				if fmt.Sprintf("%d", up.Message.Chat.ID) != n.chatID {
+					continue
+				}
+
+				if strings.HasPrefix(up.Message.Text, "/check") || strings.HasPrefix(up.Message.Text, "/status") {
+					statusMsg := getStatus()
+					_ = n.sendMessage(statusMsg)
+				}
+			}
+
+			// Small sleep to prevent tight loops if polling is fast
+			time.Sleep(1 * time.Second)
+		}
+	}
+}
+
+func (n *Notifier) getUpdates(offset int) ([]update, int, error) {
+	url := fmt.Sprintf("%s%s/getUpdates?offset=%d&timeout=10", n.apiBase, n.botToken, offset)
+	resp, err := n.client.Get(url)
+	if err != nil {
+		return nil, offset, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return nil, offset, fmt.Errorf("bad status: %d", resp.StatusCode)
+	}
+
+	var tgResp telegramResponse
+	if err := json.NewDecoder(resp.Body).Decode(&tgResp); err != nil {
+		return nil, offset, err
+	}
+
+	if !tgResp.OK {
+		return nil, offset, fmt.Errorf("api error: %s", tgResp.Description)
+	}
+
+	var updates []update
+	if err := json.Unmarshal(tgResp.Result, &updates); err != nil {
+		return nil, offset, err
+	}
+
+	if len(updates) > 0 {
+		// Next offset is last update_id + 1
+		offset = updates[len(updates)-1].UpdateID + 1
+	}
+
+	return updates, offset, nil
 }
 
 // ---------- Private methods ----------
