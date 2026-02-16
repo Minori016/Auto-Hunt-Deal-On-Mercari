@@ -18,10 +18,10 @@ import (
 
 // AIFilter uses HuggingFace CLIP to classify item images.
 type AIFilter struct {
-	apiKey     string
-	model      string
-	client     *http.Client
-	enabled    bool
+	apiKey  string
+	model   string
+	client  *http.Client
+	enabled bool
 
 	// Labels for zero-shot classification
 	keepLabels  []string // labels indicating a real product
@@ -38,16 +38,21 @@ func NewAIFilter(apiKey, model string, enabled bool) *AIFilter {
 			Timeout: 30 * time.Second,
 		},
 		keepLabels: []string{
+			"a hat or cap",
+			"a beanie",
+			"a jacket or coat",
+			"a leather jacket",
+			"a sweater or knitwear",
+			"a shirt or top",
+			"pants or trousers",
+			"shorts",
 			"a designer handbag",
 			"a luxury wallet",
-			"designer clothing",
 			"designer shoes",
-			"fashion accessories",
-			"a designer backpack",
 			"sunglasses",
 			"a watch",
 			"jewelry",
-			"a scarf",
+			"fashion accessories",
 		},
 		trashLabels: []string{
 			"an empty box",
