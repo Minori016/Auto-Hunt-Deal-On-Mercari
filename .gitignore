@@ -1,7 +1,7 @@
 # Binaries
 *.exe
-autobot
-autobot-pi
+/autobot
+/autobot-pi
 
 # Configuration (contains secrets!)
 config.json
