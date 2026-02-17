@@ -21,6 +21,7 @@ import (
 	"os/signal"
 	"path/filepath"
 	"runtime"
+	"sync"
 	"syscall"
 	"time"
 
@@ -176,15 +177,51 @@ func (b *Bot) runScanCycle() {
 	log.Println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 	log.Printf("🔍 SCAN CYCLE START — %s", start.Format("15:04:05"))
 
-	for _, brand := range b.cfg.Brands {
-		found, newItems, sent := b.scanBrand(brand)
-		totalFound += found
-		totalNew += newItems
-		totalSent += sent
+	// Worker pool for concurrent scanning
+	// Limit to 5 concurrent scans to avoid rate limits
+	const maxConcurrency = 5
 
-		// Small delay between brands to be polite
-		jitter := time.Duration(500+rand.Intn(1500)) * time.Millisecond
-		time.Sleep(jitter)
+	// Create channels
+	type scanResult struct {
+		found, newItems, sent int
+	}
+	results := make(chan scanResult, len(b.cfg.Brands))
+	sem := make(chan struct{}, maxConcurrency)
+	var wg sync.WaitGroup
+
+	// Calculate optimized random order
+	brands := make([]config.Brand, len(b.cfg.Brands))
+	copy(brands, b.cfg.Brands)
+	rand.Shuffle(len(brands), func(i, j int) { brands[i], brands[j] = brands[j], brands[i] })
+
+	// Launch workers
+	for _, brand := range brands {
+		wg.Add(1)
+		sem <- struct{}{} // Acquire semaphore
+
+		go func(br config.Brand) {
+			defer wg.Done()
+			defer func() { <-sem }() // Release semaphore
+
+			found, newItems, sent := b.scanBrand(br)
+			results <- scanResult{found, newItems, sent}
+
+			// Small jitter to prevent thundering herd
+			time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
+		}(brand)
+	}
+
+	// Wait for all workers in a separate goroutine
+	go func() {
+		wg.Wait()
+		close(results)
+	}()
+
+	// Collect results
+	for res := range results {
+		totalFound += res.found
+		totalNew += res.newItems
+		totalSent += res.sent
 	}
 
 	duration := time.Since(start)
