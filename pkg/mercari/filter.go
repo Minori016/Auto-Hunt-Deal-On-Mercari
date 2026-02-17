@@ -54,6 +54,8 @@ func NewAIFilter(apiKey, model string, enabled bool) *AIFilter {
 			"sunglasses",
 			"a watch",
 			"jewelry",
+			"silver ring",
+			"necklace",
 			"fashion accessories",
 		},
 		trashLabels: []string{
