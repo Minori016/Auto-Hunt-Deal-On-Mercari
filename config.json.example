@@ -10,16 +10,24 @@
     "enable_ai_filter": true,
     "scan_interval_minutes": 2,
     "price_min": 300,
-    "price_max": 10000,
+    "price_max": 20000,
     "max_age_minutes": 180,
     "max_deals_per_keyword": 10,
     "brands": [
         {
-            "name": "Undercover",
+            "name": "Undercover Mainline",
             "keywords": ["UNDERCOVER", "アンダーカバー", "undercoverism", "アンダーカバーイズム"]
         },
         {
-            "name": "Comme des Garcons",
+            "name": "John Undercover",
+            "keywords": ["John UNDERCOVER", "ジョンアンダーカバー"]
+        },
+        {
+            "name": "Sue Undercover",
+            "keywords": ["Sue UNDERCOVER", "スーアンダーカバー"]
+        },
+        {
+            "name": "Comme des Garcons Mainline",
             "keywords": ["Comme des Garcons", "コムデギャルソン", "CDG"]
         },
         {
@@ -27,28 +35,52 @@
             "keywords": ["Comme des Garcons Homme Plus", "コムデギャルソン オムプリュス"]
         },
         {
+            "name": "CDG Homme",
+            "keywords": ["Comme des Garcons Homme", "コムデギャルソン オム"]
+        },
+        {
             "name": "CDG Shirt",
             "keywords": ["Comme des Garcons Shirt", "コムデギャルソン シャツ"]
         },
         {
-            "name": "CDG Evergreen",
-            "keywords": ["Comme des Garcons Evergreen", "コムデギャルソン エバーグリーン"]
+            "name": "CDG Black",
+            "keywords": ["BLACK Comme des Garcons", "ブラック コムデギャルソン"]
         },
         {
-            "name": "Yohji Yamamoto",
-            "keywords": ["Yohji Yamamoto Pour Homme", "ヨウジヤマモト プールオム", "Yohji Yamamoto"]
+            "name": "Junya Watanabe Man",
+            "keywords": ["Junya Watanabe Man", "ジュンヤワタナベ マン", "eYe Junya Watanabe"]
         },
         {
-            "name": "Y's",
-            "keywords": ["Y's ワイズ", "Y's for men", "ワイズ フォーメン"]
+            "name": "Yohji Yamamoto Pour Homme",
+            "keywords": ["Yohji Yamamoto Pour Homme", "ヨウジヤマモト プールオム"]
         },
         {
-            "name": "Issey Miyake",
+            "name": "Y's for men",
+            "keywords": ["Y's for men", "ワイズ フォーメン"]
+        },
+        {
+            "name": "Ground Y",
+            "keywords": ["Ground Y", "グラウンドワイ"]
+        },
+        {
+            "name": "S'yte",
+            "keywords": ["S'yte", "サイト Yohji"]
+        },
+        {
+            "name": "Issey Miyake Mainline",
             "keywords": ["Issey Miyake", "イッセイミヤケ"]
+        },
+        {
+            "name": "Issey Miyake Men",
+            "keywords": ["Issey Miyake Men", "イッセイミヤケ メン"]
         },
         {
             "name": "Pleats Please",
             "keywords": ["PLEATS PLEASE", "プリーツプリーズ"]
+        },
+        {
+            "name": "Homme Plisse",
+            "keywords": ["HOMME PLISSÉ", "オムプリッセ"]
         },
         {
             "name": "Mihara Yasuhiro",
@@ -57,6 +89,30 @@
         {
             "name": "Shinya Kozuka",
             "keywords": ["SHINYA KOZUKA", "コヅカシンヤ"]
+        },
+        {
+            "name": "Maison Margiela",
+            "keywords": ["Maison Margiela", "メゾンマルジェラ", "Martin Margiela", "マルタンマルジェラ"]
+        },
+        {
+            "name": "Rick Owens",
+            "keywords": ["Rick Owens", "リックオウエンス", "DRKSHDW"]
+        },
+        {
+            "name": "Raf Simons",
+            "keywords": ["Raf Simons", "ラフシモンズ"]
+        },
+        {
+            "name": "Number (N)ine",
+            "keywords": ["Number (N)ine", "ナンバーナイン", "Number Nine"]
+        },
+        {
+            "name": "Kapital",
+            "keywords": ["Kapital", "キャピタル"]
+        },
+        {
+            "name": "Visvim",
+            "keywords": ["Visvim", "ビズビム"]
         },
         {
             "name": "Dickies",
@@ -145,10 +201,6 @@
         {
             "name": "Spain NT",
             "keywords": ["スペイン代表 ユニフォーム"]
-        },
-        {
-            "name": "Netherlands NT",
-            "keywords": ["オランダ代表 ユニフォーム"]
         },
         {
             "name": "Portugal NT",
